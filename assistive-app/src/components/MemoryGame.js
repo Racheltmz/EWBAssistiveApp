@@ -3,9 +3,7 @@ import ReactFlipCard from 'reactjs-flip-card';
 import Swal from 'sweetalert2';
 import Timer from './Timer';
 
-// Create timer and point sys, show pointss
 // Show username
-
 export default function MemoryGame() {
     const [validWords, setValidWords] = useState([]);
     const [reset, setReset] = useState(true);
@@ -14,6 +12,9 @@ export default function MemoryGame() {
     const [flipTrigger, setFlipTrigger] = useState([false, false, false]);
     const [choice, setChoice] = useState([]);
     const [points, setPoints] = useState(0);
+    const [start, setStart] = useState(false);
+    const [words, setWords] = useState([]);
+
     const numChoices = 0;
     const repeatCount = 4;
     const pointsIncrement = 100;
@@ -21,7 +22,7 @@ export default function MemoryGame() {
     const vowels = ['A', 'E', 'I', 'O', 'U'];
     const consonants = [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97))).filter(letter => !vowels.includes(letter));
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 300);
+    time.setSeconds(time.getSeconds() + 10);
 
     // Get all valid words
     useEffect(() => {
@@ -52,6 +53,8 @@ export default function MemoryGame() {
             setFlipTrigger([false, false, false]);
             setChoice([]);
             setOptionalToggle(false);
+            setWords([]);
+            setPoints(0);
         }
         setReset(false);
     }, [reset]);
@@ -125,15 +128,32 @@ export default function MemoryGame() {
     // Check if user formed a valid word
     const formWord = () => {
         let word = choice.join('');
+        if (word.length !== 3) {
+            Swal.fire({
+                title: 'Enter a 3 letter word!',
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+            return;
+        }
+        if (words.includes(word)) {
+            Swal.fire({
+                title: 'You already tried this!',
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+            return;
+        }
         if (validWords.includes(word.toLowerCase())) {
             Swal.fire({
                 title: 'Congrats! You formed a word!',
                 icon: 'success',
                 confirmButtonText: 'Close'
             });
-            setReset(true);
+            setFlipTrigger([false, false, false]);
+            setChoice([]);
             setPoints(points + pointsIncrement);
-            console.log(points);
+            setWords([...words, word]);
         } else {
             Swal.fire({
                 title: 'Invalid word! Try again',
@@ -218,20 +238,21 @@ export default function MemoryGame() {
                     })}
                 </div>
                 <div style={styles.textAlignCenter}>
-                    <Timer expiryTimestamp={time}></Timer>
-                    <h2 className='text-xl font-bold mb-4'>Points: {points}</h2>
-                    <div className='row-span-full mb-4'>
+                    <h2 className='mb-2' style={{ fontSize: '30px' }}>Points: {points}</h2>
+                    <Timer expiryTimestamp={time} setReset={setReset} setOptionalToggle={setOptionalToggle} setStart={setStart}></Timer>
+                    <div className='row-span-full mb-2'>
                         <button
                             type="button"
                             onClick={() => setOptionalToggle(!optionalToggle)}
-                            className="w-3/4 text-white bg-teal-700 hover:bg-teal-900 focus:outline-none font-large rounded-lg text-lg font-bold px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-teal-700">
+                            className="w-3/4 text-white bg-teal-700 hover:bg-teal-900 focus:outline-none font-large rounded-lg text-lg font-bold px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-teal-700 disabled:bg-gray-600"
+                            disabled={!start}>
                             FLIP ALL
                         </button>
                     </div>
-                    <div className='row-span-full mb-4 text-lg'>
+                    <div className='row-span-full mb-2 text-lg'>
                         <p>Form a 3-letter word:</p>
                     </div>
-                    <div className='row-span-full mb-8' style={{ ...styles.flex, ...styles.textAlignCenter }}>
+                    <div className='row-span-full mb-2' style={{ ...styles.flex, ...styles.textAlignCenter }}>
                         {Array.from({ length: 3 }).map((_, index) => {
                             return (<ReactFlipCard
                                 flipByProp={flipTrigger[index]}
@@ -243,7 +264,7 @@ export default function MemoryGame() {
                             />)
                         })}
                     </div>
-                    <div className='row-span-full mb-8'>
+                    <div className='row-span-full mb-2'>
                         <button
                             type="button"
                             onClick={() => formWord()}
@@ -252,7 +273,7 @@ export default function MemoryGame() {
                             FORM WORD
                         </button>
                     </div>
-                    <div className='row-span-full mb-8'>
+                    <div className='row-span-full mb-2'>
                         <button
                             type="button"
                             onClick={() => removeLetter()}
