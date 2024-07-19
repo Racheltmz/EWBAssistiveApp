@@ -1,28 +1,7 @@
-import React from 'react';
-
-const styles = {
-  body: {
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: 'rgb(240, 224, 214)',
-    textAlign: 'center',
-  },
-  h1: {
-    color: 'black',
-  },
-};
-
-export default function Home() {
-  return (
-    <div style={styles.body}>
-      <h1 style={styles.h1}>Memory Game</h1>
-      <p>Name</p>
-    </div>
-  );
-}
 import React, { useState } from 'react';
 import './styles.css';
 
-export default function Home() {
+export default function App() {
   const [name, setName] = useState('');
 
   const handleInputChange = (event) => {
@@ -46,19 +25,21 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1>Memory Game</h1>
-      <p>Name</p>
-      <input
-        type="text"
-        value={name}
-        onChange={handleInputChange}
-        placeholder="Enter your name"
-        className="input-box"
-      />
+      <h1>(GAME NAME)</h1>
+      <div className="input-container">
+        <label htmlFor="username">Username:</label>
+        <input
+          id="username"
+          type="text"
+          value={name}
+          onChange={handleInputChange}
+          placeholder="Enter your name"
+        />
+      </div>
       <div className="button-container">
-        <button onClick={handleHowToPlayClick}>HOW TO PLAY?</button>
-        <button onClick={handleStartGameClick}>START GAME!</button>
-        <button onClick={handleLeaderboardClick}>LEADERBOARD</button>
+        <button className="button how-to-play" onClick={handleHowToPlayClick}>HOW TO PLAY?</button>
+        <button className="button start-game" onClick={handleStartGameClick}>START GAME!</button>
+        <button className="button leaderboard" onClick={handleLeaderboardClick}>LEADERBOARD</button>
       </div>
     </div>
   );
