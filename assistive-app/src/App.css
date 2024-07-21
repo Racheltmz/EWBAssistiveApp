@@ -28,6 +28,183 @@
   color: #61dafb;
 }
 
+
+h1 {
+  color: black;
+  font-size: 2em;
+  margin-bottom: 25px;
+}
+
+.input-container {
+  margin-bottom: 25px;
+}
+
+label {
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+
+input {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px; /* Add gap between buttons */
+}
+
+.button {
+  padding: 15px 30px;
+  font-size: 1em;
+  border: 1px solid black; /* Add a thin black border */
+  border-radius: 40px;
+  cursor: pointer;
+  flex-grow: 1; /* Make buttons the same width */
+  margin: 0 10px; /* Add margin between buttons */
+}
+
+.button.how-to-play {
+  background-color: #0F726D;
+  color:white
+}
+
+.button.start-game {
+  background-color: #FEDB35;
+  color: black
+}
+
+.button.leaderboard {
+  background-color: #0F726D;
+  color: white
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.instruction-container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 800px;
+  margin: auto;
+}
+
+.instruction-container h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: black;
+}
+
+.instruction-container p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.instruction-container .step {
+  font-weight: bold;
+}
+
+.instruction-container .back-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.instruction-container .back-button:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px; 
+}
+
+.enter-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: 1px solid black;
+  border-radius: 40px;
+  cursor: pointer;
+  background-color: none;
+  color: black;
+}
+
+.enter-button:hover {
+  opacity: 0.8;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+  padding: 10px;
+  position: sticky;
+top: 20px;
+  top: 0;
+  width: auto; /* Ensures the navbar spans the full width of the screen */
+  z-index: 1000; /* Ensures the navbar is above other elements */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li {
+  margin: 0 15px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.nav-link:hover {
+  color: #ccc;
+}
+
+.container {
+  padding-top: 60px; /* Ensure this is large enough to accommodate the fixed navbar */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
