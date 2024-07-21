@@ -49,6 +49,13 @@ export default function MemoryGame() {
     // Reset letters
     useEffect(() => {
         if (reset) {
+            if (points != 0) {
+                Swal.fire({
+                    title: `Congrats you earned ${points}!`,
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
+            }
             getRandomLetter();
             setFlipTrigger([false, false, false]);
             setChoice([]);
