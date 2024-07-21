@@ -22,7 +22,7 @@ export default function MemoryGame() {
     const vowels = ['A', 'E', 'I', 'O', 'U'];
     const consonants = [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97))).filter(letter => !vowels.includes(letter));
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 10);
+    time.setSeconds(time.getSeconds() + 300);
 
     // Get all valid words
     useEffect(() => {

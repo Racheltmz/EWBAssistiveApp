@@ -33,7 +33,7 @@ export default function Timer({ expiryTimestamp, setReset, setOptionalToggle, se
           onClick={() => {
             // Restarts to 5 minutes timer
             const time = new Date();
-            time.setSeconds(time.getSeconds() + 10);
+            time.setSeconds(time.getSeconds() + 300);
             restart(time);
             setReset(false);
             setOptionalToggle(true);
