@@ -1,47 +1,51 @@
 import React, { useState } from 'react';
-import './styles.css';
+import { useNavigate } from 'react-router-dom';
+import '../styles.css';
 
-export default function App() {
-  const [name, setName] = useState('');
+function Home() {
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
-    setName(event.target.value);
+    setUsername(event.target.value);
+  };
+
+  const handleEnterClick = () => {
+    if (username.trim()) {
+      localStorage.setItem('username', username.trim());
+      alert(`Welcome, ${username}!`);
+      navigate('/game');
+    } else {
+      alert('Please enter your name.');
+    }
   };
 
   const handleHowToPlayClick = () => {
-    alert('HOW TO PLAY button clicked');
-    // Implement navigation or modal for how to play instructions
-  };
-
-  const handleStartGameClick = () => {
-    alert('START GAME button clicked');
-    // Implement navigation to the game page
-  };
-
-  const handleLeaderboardClick = () => {
-    alert('LEADERBOARD button clicked');
-    // Implement navigation to the leaderboard page
+    navigate('/instructions');
   };
 
   return (
     <div className="container">
-      <h1>(GAME NAME)</h1>
+    
+      <h1>Memory Game!</h1>
       <div className="input-container">
         <label htmlFor="username">Username:</label>
-        <input
-          id="username"
-          type="text"
-          value={name}
-          onChange={handleInputChange}
-          placeholder="Enter your name"
+        <input 
+          type="text" 
+          id="username" 
+          value={username} 
+          onChange={handleInputChange} 
+          placeholder="Enter your name" 
         />
+        <button onClick={handleEnterClick} className="button enter-button">Enter</button>
       </div>
       <div className="button-container">
         <button className="button how-to-play" onClick={handleHowToPlayClick}>HOW TO PLAY?</button>
-        <button className="button start-game" onClick={handleStartGameClick}>START GAME!</button>
-        <button className="button leaderboard" onClick={handleLeaderboardClick}>LEADERBOARD</button>
+        <button className="button start-game">START GAME!</button>
+        <button className="button leaderboard">LEADERBOARD</button>
       </div>
     </div>
   );
 }
 
+export default Home;
