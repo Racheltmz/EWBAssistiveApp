@@ -1,22 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Leaderboard from './components/Leaderboard';
 import MemoryGame from './components/MemoryGame';
-import './App.css';
-
-export default function App() {
+import Instructions from './components/Instructions';
+import './styles.css'; 
+function App() {
   return (
-    <section className='App'>
-      <Router>
+    <Router>
+      <div className="App">
         <Navbar />
         <Routes>
-          <Route exact path='/' element={<Home />}></Route>
-          <Route exact path='/game' element={<MemoryGame />}></Route>
-          <Route exact path='/leaderboard' element={<Leaderboard />}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/game" element={<MemoryGame />} />
+          <Route path="/instructions" element={<Instructions />} />
         </Routes>
-      </Router>
-    </section>
-  )
+      </div>
+    </Router>
+  );
 }
+
+export default App;
+
+
